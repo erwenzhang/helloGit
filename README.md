@@ -1,2 +1,4 @@
 # helloGit
-My first repository on GitHub.
+
+Estoy en la mesa donde hay pan.
+Me gusta :dancer:,:pizza:y :coffee:.
