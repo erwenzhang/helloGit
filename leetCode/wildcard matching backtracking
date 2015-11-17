@@ -1,0 +1,93 @@
+import java.util.TreeSet;
+
+/**
+ * Created by WENWEN on 11/3/15.*/
+
+
+
+public class Solution {
+
+
+        public boolean isMatch(String s, String p) {
+            int len1 = s.length();
+            int len2 = p.length();
+            int p_index = 0;
+            int s_index = 0;
+            int i = 0;
+            int j = 0;
+            int k;
+            boolean result = false;
+            if(len1 == 0){
+
+                for(k = 0; k<len2;k++){
+                    if(p.charAt(k)!='*'){
+                        break;
+                    }
+                }
+                if(k==len2)
+                    return true;
+
+            }
+            else if(len2 == 0)
+                return false;
+
+
+            boolean flag = false;
+            while(i<len1&&j<len2){
+                if(p.charAt(j)=='*'){
+                    p_index = j;
+                    s_index = i;
+                    flag = true;
+                    j++;
+                }
+                else  if(s.charAt(i)==p.charAt(j)||p.charAt(j)=='?'){
+
+                    i++;
+                    j++;
+                    if(j==len2&&flag&&i<len1){  // "abvv" v.s. "ab*v"  
+                        j= p_index+1;
+                        s_index++;
+                        i = s_index;
+                    }
+
+                }
+                else {
+                    if(flag){
+                        s_index++;
+                        i = s_index;
+                        j = p_index+1;
+                    }
+                    else
+                    return false;
+                }
+            }
+
+            if( i==len1&&j==len2)
+                return true;
+            else if(i<len1&&p.charAt(len2-1)=='*')
+                return true;
+            else if(j<len2){
+                for(int l = j;l<len2;l++){
+                    if(p.charAt(l)!='*')
+                        return false;}
+                return true;
+            }
+            else
+                return false;
+
+        }
+
+}
+     
+  
+    
+
+
+
+
+        
+
+
+
+   
+
