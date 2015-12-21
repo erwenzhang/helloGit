@@ -1,0 +1,85 @@
+class Solution(object):
+    def alienOrder(self, words):
+        if words[0][0] == None:
+            return ''
+        if len(words)==1:
+            return words[0]
+        pre_word = words[0]
+        left_chars = ''
+        gra = []
+        gra_re = []
+        flag_list1= []
+        flag_list2=[]
+        len_flag = []
+        words = words[1:len(words)]
+    
+        for index in range(26):
+            flag_list1.append(False)
+            flag_list2.append(True)
+            gra.append([])
+            gra_re.append([])
+            len_flag.append(0)
+        
+        for word in words:
+            compare_word = pre_word
+            flag = False
+            len1 = len(compare_word)
+            len2 = len(word)
+            # if len1< len2:
+            # 	left_chars = left_chars + word[len1:len2]
+            for index1 in range(len(compare_word)):
+                if index1 >= len2:
+                    if flag == False:
+                        return ''
+                    else:
+                        left_chars = left_chars+ compare_word[index1:len1]
+                        break
+                else:   
+                    cChar=compare_word[index1]
+                    mChar=word[index1]
+                    if cChar == mChar:
+                    	flag_list1[ord(cChar)-97] = True
+                        continue
+                    else:
+                        gra_re[ord(mChar)-97].append(ord(cChar)-97)
+                        gra[ord(cChar)-97].append(ord(mChar)-97)
+                        flag_list1[ord(cChar)-97] = True
+                        flag_list1[ord(mChar)-97] = True
+                        flag_list2[ord(mChar)-97] = False
+                        flag = True
+                        left_chars = left_chars + compare_word[index1:len1] + word[index1:len2]
+                        break    
+            pre_word = word
+        
+        S = []
+        for index in range(26):
+        	len_flag[index] = len(gra_re[index])
+        	if flag_list1[index] and flag_list2[index]:
+        		S.append(index)
+        i = 0
+        L = ''
+        while i<len(S):
+            L=  L + chr(S[i]+97)
+            for j in gra[S[i]]:
+                for tmp_char in gra_re[j]:
+                     if tmp_char ==  S[i]:
+                     	len_flag[j] -= 1
+                       
+                if len_flag[j] == 0:
+                    S.append(j)
+            i+=1
+
+        for i in range(26):
+        	if len_flag[i]>0:
+        		return ''
+        for tmp_char in left_chars:
+            if flag_list1[ord(tmp_char)-97]:
+                continue
+            else:
+                L =  L +tmp_char
+                flag_list1[ord(tmp_char)-97] = True
+        return L
+
+mWords = ["ri","xz","qxf","jhsguaw","dztqrbwbm","dhdqfb","jdv","fcgfsilnb","ooby"]
+A = Solution()
+print A.alienOrder(mWords)
