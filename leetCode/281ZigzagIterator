@@ -1,0 +1,79 @@
+
+
+public class ZigzagIterator{
+    private List<Integer> v1, v2;
+    private int[] mark;
+    private int[] len;
+    private boolean[] flag;
+
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2){
+
+        this.v1 = v1;
+        this.v2 = v2;
+        this.len = new int[2];
+        this.mark = new int[2];
+        this.flag = new boolean[2];
+        this.len[0]=v1.size();
+        this.len[1]=v2.size();
+        Arrays.fill(this.mark, 0);
+        Arrays.fill(this.flag,false);
+        this.flag[0] = true;
+
+
+
+    }
+
+    public int next(){
+        if(this.hasNext()){
+            if(this.mark[0]<this.len[0]&&this.mark[1]<this.len[1]){
+                if(flag[0]){
+                    flag[1] = true;
+                    flag[0] = false;
+                    int tmp = this.mark[0];
+                    this.mark[0]+=1;
+                    return this.v1.get(tmp);
+                }
+                else{
+                    flag[0]= true;
+                    flag[1] = false;
+                    int tmp = this.mark[1];
+                    this.mark[1]+=1;
+                    return this.v2.get(tmp);
+                }
+            }
+            else if(this.mark[0]<this.len[0]){
+                int tmp = this.mark[0];
+                this.mark[0]+=1;
+                return this.v1.get(tmp);
+
+
+            }
+            else{
+                int tmp = this.mark[1];
+                this.mark[1]+=1;
+                return this.v2.get(tmp);
+            }
+
+
+
+
+
+
+        }
+        else {
+         //   throw new Error("Out of boundary.");
+            return 0;
+        }
+
+    }
+
+    public boolean hasNext(){
+        if(this.mark[0]>=this.len[0]&&this.mark[1]>=this.len[1]){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+}
