@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ZigzagIterator{
+    private LinkedList<Iterator> itList;
+    private Iterator itOfitList;
+
+    public ZigzagIterator(List<Integer> v1,List<Integer> v2,List<Integer> v3){
+        itList = new LinkedList<Iterator>();
+        if(!v1.isEmpty()){
+            itList.add(v1.iterator());
+        }
+
+        if(!v2.isEmpty()){
+            itList.add(v2.iterator());
+        }
+        if(!v3.isEmpty()){
+            itList.add(v3.iterator());
+        }
+        itOfitList = itList.iterator();
+    }
+
+    public int next() {
+        Iterator poll = itList.remove();
+        int result = (Integer)poll.next();
+        if(poll.hasNext()) itList.add(poll);
+        return result;
+    }
+
+    public boolean hasNext(){
+        Iterator it = itList.iterator();
+        while(it.hasNext()){
+            if(((Iterator)it.next()).hasNext())
+                return true;
+        }
+        return false;
+    }
+}
