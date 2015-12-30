@@ -1,0 +1,50 @@
+public class Solution{
+
+    private int maxLength;
+    private int len;
+
+    private int findMax(Set<String> wordDict){
+        int max = 0;
+        for (String s: wordDict){
+            max = Math.max(s.length(),max);
+        }
+
+        if(this.len<max){
+            return this.len;
+        }
+        else{
+            return max;
+        }
+    }
+
+    public boolean wordBreak(String s, Set<String> wordDict ){
+        len = s.length();
+        maxLength = findMax(wordDict);
+        boolean[] flag = new boolean[len+1];
+        Arrays.fill(flag,false);
+        flag[0] = true;
+
+        for(int i=0;i<len;i++){
+            if(!flag[i]){
+                continue;
+            }
+            for(int j =1;j<=maxLength&&(i+j<=len);j++){
+
+                String tmp = s.substring(i,i+j);
+                if(wordDict.contains(tmp)){
+                    flag[i+j] = true;
+                }
+
+                if(flag[len]){
+                    return true;
+                }
+
+
+            }
+
+
+        }
+        return false;
+    }
+
+}
