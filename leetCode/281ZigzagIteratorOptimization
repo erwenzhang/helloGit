@@ -1,0 +1,37 @@
+
+
+public class ZigzagIterator{
+    private Iterator it1,it2;
+    private boolean flag;
+    public ZigzagIterator(List<Integer> v1,List<Integer> v2){
+       if(v1!=null)
+        this.it1 = v1.iterator();
+        if(v2!=null)
+        this.it2 = v2.iterator();
+        flag = true;
+    }
+    public int next(){
+        if(flag){
+            if(it1.hasNext()){
+                flag = false;
+                return (Integer)it1.next();
+            }
+            else{
+                flag = false;
+                return (Integer)it2.next();
+            }
+        }else{
+            if(it2.hasNext()){
+                flag = true;
+                return (Integer)it2.next();
+            }
+            else{
+                flag = true;
+                return (Integer)it1.next();
+            }
+        }
+    }
+    public boolean hasNext(){
+        return it1.hasNext()||it2.hasNext();
+    }
+}
