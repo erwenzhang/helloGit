@@ -5,7 +5,7 @@ public class Solution {
         }
         while((num&1)==0){
             //number is divisible by 2
-            num = num/2;
+            num = num>>1;
         }
         while(num%5==0){
             //number is divisible by 5
