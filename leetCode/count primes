@@ -1,0 +1,23 @@
+public class Solution{
+    boolean[] flag;
+    public int countPrimes(int input){
+        int count = 0;
+        if(input<2){
+            return 0;
+        }
+        flag = new boolean[input];
+        int bound = (int)Math.sqrt(input);
+        for(int i = 2;i<=bound;i++){
+            for(int j = i;i*j<input;j++){
+                if(!flag[i*j]){
+                flag[i*j]=true;
+                    count++;
+                }
+
+            }
+        }
+    
+        return input-2-count;
+
+    }
+}
