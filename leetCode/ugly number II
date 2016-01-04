@@ -1,0 +1,30 @@
+public class Solution{
+
+    public int getmin(int x,int y,int z){
+        return Math.min(x,Math.min(y,z));
+    }
+    public int nthUglyNumber(int n){
+        int n1=0,n2=0,n3=0;
+        int[] a = new int[n];
+
+        a[0] = 1;
+        int count = 1;
+        while(count<n){
+            int tmp=getmin(a[n1]*2,3*a[n2],5*a[n3]);
+            a[count]=tmp;
+            if (tmp==a[n1]*2){
+                n1++;
+            }
+            if (tmp==a[n2]*3){
+                n2++;
+            }
+            if(tmp==a[n3]*5){
+                n3++;
+            }
+            count++;
+        }
+        return a[n-1];
+
+    }
+    
+}
