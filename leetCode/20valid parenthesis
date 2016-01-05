@@ -1,0 +1,44 @@
+public class Solution{
+  public boolean isValid(String str) {
+     
+      char[] strChar = str.toCharArray();
+       int len = strChar.length;
+      if(len%2!=0){
+          return false;
+      }
+        Stack<Character> st = new Stack<Character>();
+        for(int i = 0; i<len;i++){
+            char tmp = strChar[i];
+    
+             if(tmp=='{'||tmp=='('||tmp=='['){
+                st.push(tmp);
+            }
+            else{
+            if(st.isEmpty()){
+            return false;}
+            switch(st.pop()){
+                case '(':
+                    if(tmp!=')')
+                     return false;
+                     break;
+                case '{':
+                    if(tmp!='}')
+                     return false;
+                     break;
+                case '[':
+                    if(tmp!=']')
+                     return false;
+                     break;
+            }
+           
+                
+            }
+
+           
+        }
+        if(!st.isEmpty()){
+            return false;}
+        else{
+            return true;}
+}
+}
