@@ -1,0 +1,24 @@
+public class Solution{
+//use dp solution
+	public int numSquares(int input){
+    int[] dp = new int[input+1];
+    for(int i = 0 ; i<=input;i++){
+	dp[i]=i;
+    }
+
+for(int i = 1; i<=input;i++){
+	int sqrt = (int)Math.sqrt(i);
+	if(i==sqrt*sqrt){
+	dp[i]=1;
+	continue;
+}
+for(int j=1;j<=sqrt;j++){
+	int dfs = i-j*j;
+	dp[i]=Math.min(dp[i],dp[dfs]+1);
+
+}
+}
+return dp[input];		
+
+}
+}
