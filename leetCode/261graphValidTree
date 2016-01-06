@@ -1,0 +1,48 @@
+public class Solution {
+     
+
+    private int[] graph;
+    private int components;
+    public boolean validTree(int n, int[][] edges){
+        if(n==0 || edges==null)
+            return false;
+
+        initiate(n);
+        for(int i = 0;i<edges.length;i++){
+            int x = root(edges[i][0],graph);
+            int y = root(edges[i][1],graph);
+            if(x==y){
+                return false;
+            }
+            if(x>y){
+                x=x+y;
+                y=x-y;
+                x=x-y;
+            }
+            graph[y]=x;
+            components--;
+
+        }
+        if(components==1)
+        return true;
+        else {
+            return false;
+        }
+
+
+    }
+    private void initiate(int n){
+        graph = new int[n];
+        components = n;
+        for(int i =0;i<n;i++){
+            graph[i]=i;
+        }
+    }
+
+    private int root(int x, int[] gra){
+        while(x!=gra[x]){
+            x=gra[x];}
+        return x;
+    }
+
+}
