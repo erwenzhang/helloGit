@@ -1,0 +1,56 @@
+public int countComponents(int n,int[][] edges){
+            int[] graph=new int[n];
+            int[] heavy=new int[n];
+            if(n==0 || edges==null)
+                return 0;
+            for(int i = 0;i<n;i++)
+                graph[i]=i;
+            for(int i=0;i<edges.length;i++){
+                int node1,node2;
+                if (heavy[edges[i][0]]== Math.max(heavy[edges[i][0]],heavy[edges[i][1]]) ){
+
+                    node1=edges[i][0];
+                    node2=edges[i][1];
+                }
+                else{
+                    node1=edges[i][1];
+                    node2=edges[i][0];
+                }
+
+                node1 = root(node1,graph);
+                node2 = root(node2,graph);
+                if(node2!=node1){
+                graph[node2]=node1;
+                heavy[node1]++;}
+
+                for(int j =0;j<n;j++){
+                    if(graph[j]==node1)
+                        heavy[j]=heavy[node1];
+                }
+
+            }
+           int count=0;
+            boolean[] flag = new boolean[n];
+            for(int i=0;i<n;i++){
+                int tmp = graph[i];
+                while(graph[tmp]!=tmp){
+                    tmp=graph[tmp];
+                }
+                graph[i]=tmp;
+                if(!flag[tmp]){
+                    flag[tmp]=true;
+                    count++;
+                }
+
+
+            }
+            return count;
+
+        }
+
+    public int root(int x,int[] graph){
+        while(graph[x]!=x){
+            x = graph[x];
+        }
+        return x;
+    }
