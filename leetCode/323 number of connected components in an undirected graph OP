@@ -1,0 +1,53 @@
+public class Solution {
+    
+           public int countComponents(int n,int[][] edges){
+            int[] graph=new int[n];
+            int[] heavy=new int[n];
+            if(n==0 || edges==null)
+                return 0;
+            for(int i = 0;i<n;i++){
+                graph[i]=i;
+                heavy[i]=1;
+            }
+            for(int i=0;i<edges.length;i++){
+                int node1,node2;
+                node1 = root(edges[i][0],graph);
+                node2 = root(edges[i][1],graph);
+                if(node1==node2){
+                    continue;
+                }
+                if (heavy[node1]!= Math.max(heavy[node1],heavy[node2]) ){
+                    node2=node1+node2;
+                    node1=node2-node1;
+                    node2=node2-node1;
+                }
+            
+                graph[node2]=node1;
+                heavy[node1]+=heavy[node2];
+
+
+            }
+           int count=0;
+            boolean[] flag = new boolean[n];
+            for(int i=0;i<n;i++){
+                int tmp = graph[i];
+                tmp = root(tmp,graph);
+                graph[i]=tmp;
+                if(!flag[tmp]){
+                    flag[tmp]=true;
+                    count++;
+                }
+
+
+            }
+            return count;
+
+        }
+
+    public int root(int x,int[] graph){
+        while(graph[x]!=x){
+            x = graph[x];
+        }
+        return x;
+    }
+}
