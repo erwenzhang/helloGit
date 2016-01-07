@@ -3,6 +3,7 @@ public class Solution {
            public int countComponents(int n,int[][] edges){
             int[] graph=new int[n];
             int[] heavy=new int[n];
+            int components = n;
             if(n==0 || edges==null)
                 return 0;
             for(int i = 0;i<n;i++){
@@ -24,23 +25,11 @@ public class Solution {
             
                 graph[node2]=node1;
                 heavy[node1]+=heavy[node2];
+                components--;
 
 
             }
-           int count=0;
-            boolean[] flag = new boolean[n];
-            for(int i=0;i<n;i++){
-                int tmp = graph[i];
-                tmp = root(tmp,graph);
-                graph[i]=tmp;
-                if(!flag[tmp]){
-                    flag[tmp]=true;
-                    count++;
-                }
-
-
-            }
-            return count;
+        return components;
 
         }
 
