@@ -1,0 +1,47 @@
+import java.util.Iterator;
+import java.util.List;
+
+public class Vector2D {
+
+    List<List<Integer>> vec;
+    int x;
+    int size;
+    Iterator it_tmp;
+
+    public Vector2D(List<List<Integer>> vec2d) {
+        vec = vec2d;
+        x = 0;
+        size = vec2d.size();
+        if (size > 0)
+            it_tmp = vec.get(0).iterator();
+    }
+
+    public int next() {
+        if (it_tmp.hasNext())
+            return (int) it_tmp.next();
+        else if (x < size-1) {
+            x++;
+            it_tmp = vec.get(x).iterator();
+            return this.next();
+        }
+        return -1;
+    }
+
+    public boolean hasNext() {
+        if(size==0)
+            return false;
+        if (it_tmp.hasNext())
+            return true;
+        else {
+            int tmp = x;
+            tmp++;
+            while (tmp < size) {
+                if (vec.get(tmp).size() > 0) {
+                    return true;
+                }
+                tmp++;
+            }
+            return false;
+        }
+    }
+}
