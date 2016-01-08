@@ -1,0 +1,44 @@
+public class Solution{
+    int num;
+    HashSet<Integer>[] graph;
+    int[] dis;
+    int[] parent;
+    List<Integer> roots;
+    HashSet<Integer> leaves;
+    public List<Integer> findMinHeightTrees(int n,int[][] edges){
+        roots = new ArrayList<>();
+        graph = new HashSet[n];
+        if (n == 1) return Collections.singletonList(0);
+        for(int i = 0;i < edges.length; i++){
+            if(graph[edges[i][0]]==null){
+                graph[edges[i][0]]=new HashSet<>();
+            }
+            if(graph[edges[i][1]]==null){
+                graph[edges[i][1]]=new HashSet<>();
+            }
+            graph[edges[i][0]].add(edges[i][1]);
+            graph[edges[i][1]].add(edges[i][0]);
+        }
+        for(int i = 0;i<n;i++){
+            if(graph[i].size()==1){
+                roots.add(i);
+            }
+        }
+        int parent;
+        int tmp;
+        int count_chileren = roots.size();
+        while(n>2){
+            n=n-roots.size();
+            ArrayList<Integer> newRoots = new ArrayList<>();
+            for(int i:roots){
+                parent  = graph[i].iterator().next();
+                graph[parent].remove(i);
+                if(graph[parent].size()==1){
+                    newRoots.add(parent);
+                }
+            }
+            roots = newRoots;
+        }
+return roots;
+    }
+}
