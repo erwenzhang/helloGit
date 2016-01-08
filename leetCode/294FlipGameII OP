@@ -1,0 +1,17 @@
+public class Solution {
+    HashMap<String,Boolean> cache = new HashMap<>();
+   public boolean canWin(String str){
+       if(cache.containsKey(str)) return cache.get(str);
+        for(int i = 0;i<str.length()-1;i++){
+            if(str.charAt(i)=='+'&&str.charAt(i+1)=='+'){
+                if (!canWin(str.substring(0,i)+"--"+str.substring(i+2))){
+                    cache.put(str,true);
+                    return true;
+                    
+                }
+            }
+        }
+        cache.put(str,false);
+        return false;
+    }
+}
