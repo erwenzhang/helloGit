@@ -1,0 +1,40 @@
+import java.util.Iterator;
+
+public class PeekingIterator<E> implements Iterator<E> {
+    private Iterator<E> it;
+    private boolean has_peeked;
+    private E peeked_element;
+
+    public PeekingIterator(Iterator<E> iterator){
+        it = iterator;
+    }
+
+    public E peek(){
+        if(!has_peeked){
+            if(it.hasNext()){
+                peeked_element = it.next();
+                has_peeked = true;
+            }
+
+        }
+        return peeked_element;
+    }
+
+    public E next(){
+        if(has_peeked){
+            has_peeked = false;
+            return peeked_element;
+        }else{
+            return it.next();
+        }
+    }
+
+    public boolean hasNext(){
+        return has_peeked||it.hasNext();
+    }
+    public void remove(){
+
+    }
+
+
+}
