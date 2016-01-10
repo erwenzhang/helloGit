@@ -1,0 +1,46 @@
+public class Solution {
+    public String fractionToDecimal(int numerator, int denominator){
+        if(denominator == 0) return "";
+        StringBuilder sb = new StringBuilder();
+        if((numerator<0&&denominator>0)||(numerator>0&&denominator<0)){
+            sb.append('-');
+        }
+        HashMap<Long,Integer> recursion = new HashMap<>();
+        long den = Math.abs((long)denominator);
+        long n = Math.abs((long)numerator/(long)denominator);
+        long remainder = Math.abs((long)numerator%(long)denominator);
+        sb.append(n);
+        if(remainder == 0){
+            return sb.toString();
+        }
+        sb.append('.');
+        String str2 = "";
+        int count = 0;
+        while(!recursion.containsKey(remainder)){
+            recursion.put(remainder,count);
+            remainder*=10;
+            while(remainder/den==0){
+                count++;
+                recursion.put(remainder,count);
+                remainder*=10;
+                str2+="0";
+            }
+            n = remainder/den;
+            remainder = remainder%den;
+            str2+=n;
+            if(remainder == 0){
+                sb.append(str2.toCharArray());
+                return sb.toString();
+            }
+            count++;
+
+        }
+        count = recursion.get(remainder);
+        str2 = str2.substring(0,count)+"("+str2.substring(count)+")";
+        return sb.append(str2.toCharArray()).toString();
+
+
+
+    }
+
+}
