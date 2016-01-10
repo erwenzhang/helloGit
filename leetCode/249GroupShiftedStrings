@@ -1,0 +1,33 @@
+public class Solution {
+   public List<List<String>> groupStrings(String[] strings){
+        Map<String,Integer> group = new HashMap<>();
+        List<List<String>> result = new ArrayList<>();
+        int count = 0;
+       // String  key = "";
+        for(String string:strings){
+            String  key = "";
+            char start = string.charAt(0);
+            for(int i = 1;i<string.length();i++){
+                char next = string.charAt(i);
+                int dis = next - start;
+                if(dis<0){
+                    dis+=26;
+                }
+                start = next;
+                key=key+"/"+dis+"/";
+            }
+            if(!group.containsKey(key)){
+                group.put(key,count);
+                List<String> tmp = new ArrayList<>();
+                tmp.add(string);
+                result.add(tmp);
+                count++;
+            }else{
+                result.get(group.get(key)).add(string);
+                Collections.sort(result.get(group.get(key)));
+            }
+        }
+        return result;
+    }
+
+}
