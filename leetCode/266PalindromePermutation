@@ -1,0 +1,26 @@
+public class Solution{
+public boolean canPermutePalindrome(String str){
+	boolean flag = false;
+ 	Map<Character,Integer> frequency = new HashMap<Character,Integer>();
+	if(str.length()%2==0)
+		flag = true;
+	for(int i = 0;i<str.length();i++){
+		if(frequency.containsKey(str.charAt(i))){ 
+		    int x = frequency.get(str.charAt(i));
+        frequency.put(str.charAt(i),++x);
+    }else{
+        frequency.put(str.charAt(i),1);
+    }
+  }
+  for(Integer tmp:frequency.values()){
+    	if(tmp%2==0){
+    	  continue;
+      }else if(!flag){
+    	  flag = true;
+      }
+  else
+  	return false;
+  }
+  return true;
+  }	
+}
