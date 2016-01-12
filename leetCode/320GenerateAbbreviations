@@ -1,0 +1,40 @@
+public class Solution {
+    List<String> rets;
+    public List<String> generateAbbreviations(String word){
+    	int len = word.length();
+    	rets = new ArrayList<>();
+    	dfs(word.toCharArray(),0);
+    	return rets;
+    }
+
+    public void dfs(char[] word,int index){
+    	if(index!=word.length){
+    		dfs(word,index+1);
+            
+            char[] x = Arrays.copyOf(word,word.length);
+            x[index]='1';
+    		dfs(x,index+1);	
+        }else{
+        	String ret = transfer(word);
+        	rets.add(ret);
+        }
+    }
+    public String transfer(char[] word){
+    	int count = 0;
+    	String ret ="";
+        for(int i= 0;i<word.length;i++){
+        		if(word[i]=='1'){
+        			count++;
+                }else if(count!=0){
+                	ret=ret+count+word[i];
+                	count = 0;
+                }else{
+                	ret+=word[i];
+                }
+        }
+        if(count!=0)
+        	ret+=count;
+        return ret;
+    }
+
+}
