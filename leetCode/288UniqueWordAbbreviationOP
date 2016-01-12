@@ -1,0 +1,41 @@
+
+public class ValidWordAbbr{
+	Map<String,Set<String>> map = new HashMap<>();
+	public ValidWordAbbr(String[] dic){
+		for(String string:dic){
+			String abbr = generate(string);
+			Set<String> val = map.get(abbr);
+			if(val!=null){
+        	    val.add(string);
+            }else{
+             	val = new HashSet<>();
+            	val.add(string);
+            	map.put(abbr,val);
+            }
+        }
+    }
+    public boolean isUnique(String word){
+    	String abbr = generate(word);
+    	if(!map.containsKey(abbr)){
+    	    return true;
+        }else{
+            Set<String> val = map.get(abbr);
+    	    return val.size()==1&&val.iterator().next().equals(word);
+        }
+    }
+    public String generate(String str){
+    	if(str.length()<3){
+    	return str;
+        }
+    return ""+str.charAt(0)+(str.length()-2)+str.charAt(str.length()-1);
+    }
+}
+
+
+
+
+
+// Your ValidWordAbbr object will be instantiated and called as such:
+// ValidWordAbbr vwa = new ValidWordAbbr(dictionary);
+// vwa.isUnique("Word");
+// vwa.isUnique("anotherWord");
