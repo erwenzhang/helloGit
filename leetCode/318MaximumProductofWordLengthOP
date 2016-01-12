@@ -1,0 +1,26 @@
+public class Solution {
+    public int maxProduct(String[] strs){
+    	int[] lens = new int[strs.length];
+    	int[] words = new int[strs.length];
+        int max=0;
+        for(int i=0;i<strs.length;i++){
+    		String str = strs[i];
+    	    
+            for(int j=0;j<str.length();j++){
+                words[i]=words[i]|1<<(str.charAt(j)-'a');
+            }
+            lens[i] = str.length();
+            for(int j=0;j<i;j++){
+                if((words[j]&words[i])==0){
+                   	
+                        max = Math.max(max, lens[j]*lens[i]);
+                    
+                }
+                
+            }
+        }
+  return max;
+}
+
+
+}
