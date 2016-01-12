@@ -13,7 +13,6 @@ public class Solution {
            nums[i] = dif*(k)+(k-1)*same;
            same = dif;
            dif = nums[i]-same;
-            if(nums[i]<nums[i-1]) return 0;
         }
       return nums[n-1];
     }
