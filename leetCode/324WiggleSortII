@@ -1,0 +1,22 @@
+public class Solution {
+     public void wiggleSort(int[] nums){
+      	Arrays.sort(nums);
+      	int[] copied = Arrays.copyOf(nums,nums.length);
+      	int left;
+      	int right = nums.length-1;
+        if(nums.length%2==0){
+            left = nums.length/2-1;	
+        }else{
+        	  left = nums.length/2;
+        }
+        for(int i = 0;i<nums.length;i++){
+          	if(i%2==1){
+              	nums[i] = copied[right];
+              	right--;
+            }else{
+              	nums[i] = copied[left];
+              	left--;
+            }
+        }
+    }
+}
