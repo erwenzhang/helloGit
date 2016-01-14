@@ -1,0 +1,52 @@
+public class Solution {
+    boolean odd = false;
+    List<String> ret;
+    char[] medianSet={'0','1','8'};
+    char[] startSet={'1','8','6','9'};
+    char[] normalSet={'1','8','6','9','0'};
+    public List<String> findStrobogrammatic(int n){
+    	ret = new ArrayList<>();
+    	if((n&1)==1) odd= true;
+    	collectStrobogrammatic(n/2,"");	
+    	return ret;
+    }
+    public void collectStrobogrammatic(int n,String str){
+    	if(n==0){
+            if(str.equals("")&&odd!=true) return;
+            else{
+            	StringBuilder sb = new StringBuilder(str);
+            	sb.reverse();
+            	transform(sb);
+            	if(odd){
+                	for(char median:medianSet){
+                		sb.append(median).append(str);
+                		ret.add(sb.toString());
+                		sb.delete(sb.length()-str.length()-1,sb.length());
+                    }
+                }else{
+            	    ret.add(sb.append(str).toString());
+                }
+            }
+    	}else if(n==1){
+    		for(char start:startSet){
+    			collectStrobogrammatic(n-1,str+start);
+            }
+    
+        }else{
+        	for(char normal:normalSet){
+        		collectStrobogrammatic(n-1,str+normal);
+            }
+        }
+    
+    }
+    public void transform(StringBuilder sb){
+    	for(int i =0;i<sb.length();i++){
+    		if(sb.charAt(i)=='6')
+    			sb.setCharAt(i,'9');
+    		else if(sb.charAt(i)=='9'){
+                sb.setCharAt(i,'6');
+            }
+        }
+    }
+
+}
