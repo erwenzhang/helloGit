@@ -1,0 +1,52 @@
+public class Solution {
+    int target = 0;
+    boolean flag = false;
+    int[][] matrix;
+    int len1 = 0;
+    int len2 = 0;
+    public boolean searchMatrix(int[][] matrix, int target){
+        len1 = matrix.length;
+        if(len1 == 0)
+	        return false;
+        this.matrix = matrix; // initiate or not??
+        this.target = target;
+        return binarySearch(0,0,len1-1,matrix[0].length-1);	
+
+    }
+    public boolean binarySearch(int x_1,int y_1,int x_2,int y_2){
+    	if(x_1+1==x_2&&y_1+1==y_2){
+    		return matrix[x_1][y_1]==target||matrix[x_2][y_1]==target||matrix[x_1][y_2]==target||matrix[x_2][y_2]==target;
+        }
+        if(x_1==x_2&&y_1==y_2){
+            return matrix[x_1][y_1]==target;
+        }
+        if(x_1==x_2&&y_1+1==y_2){
+            return matrix[x_1][y_1]==target||matrix[x_2][y_2]==target;
+            
+        }
+        if(x_1+1==x_2&&y_1==y_2){
+            return matrix[x_1][y_1]==target||matrix[x_2][y_2]==target;
+        }
+        int x_m = (x_1+x_2)/2;
+    	int y_m = (y_1+y_2)/2;
+    	int median = matrix[x_m][y_m];
+    	if(target == median){
+    	    return true;
+        }else if(target>median){
+            if(x_1==x_2||y_1==y_2)
+                return binarySearch(x_m,y_m,x_2,y_2);
+    	    if(!binarySearch(x_m+1,y_1,x_2,y_2)&&!binarySearch(x_1,y_m+1,x_m,y_2))
+    	        return false;
+    	    else
+    	        return true;
+        }else{
+            if(x_1==x_2||y_1==y_2)
+                return binarySearch(x_1,y_1,x_m,y_m);
+    	    if(!binarySearch(x_1,y_1,x_m,y_2)&&!binarySearch(x_m+1,y_1,x_2,y_m))
+    	        return false;
+    	   else 
+    	        return true;
+        }
+    }
+
+}
