@@ -1,0 +1,58 @@
+public class Solution {
+    List<String> results;
+    int len;
+    int median = -1;
+    public List<String> generatePalindromes(String s){
+        results = new ArrayList<>();
+        len = s.length();
+        int[] count = new int[256];
+        for(int i = 0;i<s.length();i++){
+            count[s.charAt(i)]++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        dfs(count,sb);
+        return  results;
+    }
+
+    public boolean dfs(int[] count, StringBuilder sb){
+
+        for(int i = 0;i<count.length;i++){
+            if(count[i]<=0)
+                continue;
+            if(count[i]%2==1){
+                if(median==-1){
+                    median = i;
+                    count[i]--;
+                }else if(median!=i){
+                    return false;
+                }else{
+                    count[i]--;
+                }
+            }
+            StringBuilder sb_tmp = new StringBuilder(sb.toString());
+            int[] count_tmp = Arrays.copyOf(count,256);
+            if(count[i]>0) {
+                sb_tmp.append((char)(i));
+                count_tmp[i] =count_tmp[i]-2;
+                if(!dfs(count_tmp,sb_tmp))
+                    return  false;
+
+            }
+           // count[i] = count[i]-2;
+
+
+        }
+        if((sb.length()==len/2&&median!=-1)||(sb.length()==len/2&&len%2==0)){
+            StringBuilder half_sb = new StringBuilder(sb.toString());
+            half_sb.reverse();
+            if(median>=0){
+                sb.append((char)(median));
+            }
+            sb.append(half_sb);
+            results.add(sb.toString());
+            return true;
+        }
+        return true;
+    }
+}
