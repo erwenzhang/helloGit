@@ -1,0 +1,34 @@
+public class Solution {
+    public boolean isStrobogrammatic(String num){
+	    int[] map = new int[num.length()];
+    	boolean odd = false;
+		  if((num.length()&1)==1){
+	        odd = true;
+      }
+	    for(int i=0;i<num.length()/2;i++){
+    		int tmp = Character.getNumericValue(num.charAt(i));		            
+    		if(tmp!=1&&tmp!=8&&tmp!=0&&tmp!=6&&tmp!=9)
+    	        return false;
+		    else{
+			        int j = num.length()-1-i;
+			        int tmp_2=Character.getNumericValue(num.charAt(j));
+              if(tmp==6||tmp==9){
+	                if(Math.abs(tmp_2-tmp)!=3)
+                      return false;	
+              }else if(tmp!=tmp_2){
+		                return false;
+        }
+      }
+    
+    }
+    if(odd){
+		    char median = num.charAt(num.length()/2);
+		    if(median!='1'&&median!='0'&&median!='8')
+			    return false;
+    }
+        return true;
+	
+    }
+
+
+}
