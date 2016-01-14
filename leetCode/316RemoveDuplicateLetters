@@ -13,25 +13,24 @@ public class Solution {
                 stack.push(cur);
                 count[cur-'a']--;
                 flag[cur-'a'] = true;
+
             }else{ 
                 top = (char)stack.peek();
-                if(top==cur){
+                if(flag[cur-'a']){
 		            count[cur-'a']--;
-		           // continue;
                 }else{
-    	             if(!flag[cur-'a']){
                         while(top>cur&&count[top-'a']>0){
-        		                flag[(char)stack.pop()-'a']=false;
-        		                if(stack.isEmpty()) break;
-        		                top = (char)stack.peek();
+        		            flag[(char)stack.pop()-'a']=false;
+        		            if(stack.isEmpty()) break;
+        		             top = (char)stack.peek();
                         }
+                       
         		            stack.push(cur);
-                        count[cur-'a']--;
-                        flag[cur-'a'] = true;
-                    }else{
-                    count[cur-'a']--;
-                    }
+                            count[cur-'a']--;
+                            flag[cur-'a'] = true;
+                    
                 }
+                
             }
         }
         String str = "";
@@ -39,5 +38,7 @@ public class Solution {
     	    str=(char)stack.pop()+str;
         }
         return str;
+
         }   
+
 }
