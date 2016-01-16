@@ -1,0 +1,16 @@
+public class Solution {
+    int count= 0;
+    int tmp = Integer.MAX_VALUE;
+    public int kthSmallest(TreeNode root,int k){
+        traversal(root,k);
+    return tmp;
+}
+    public void traversal(TreeNode root,int k){
+    	if(root==null) return;
+    	traversal(root.left,k);
+    	count++;
+    	if(count==k){ tmp = root.val; return;}
+    	traversal(root.right,k);
+    }
+
+}
