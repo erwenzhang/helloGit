@@ -2,8 +2,8 @@ public class Solution{
 	public int nthSuperUglyNumber(int n,int[] primes){
 		int size = primes.length;
 		if(size == 0){
-        return 1;
-}
+        		return 1;
+		}
 		int[] uglyNum = new int[n];
 		int[] mark = new int[size];
 		uglyNum[0]=1;
@@ -11,17 +11,16 @@ public class Solution{
 			int tmp = uglyNum[mark[0]]*primes[0];
 			for(int j = 1;j<size;j++){
 				tmp = Math.min(tmp,uglyNum[mark[j]]*primes[j]);
-}
-uglyNum[i] = tmp;
-for(int  j =0;j<size;j++){
-	if(tmp==uglyNum[mark[j]]*primes[j]){
-		mark[j]++;
-}
-}
-}
+			}
+			uglyNum[i] = tmp;
+			for(int  j =0;j<size;j++){
+				if(tmp==uglyNum[mark[j]]*primes[j]){
+					mark[j]++;
+				}
+			}
+		}
 	return uglyNum[n-1];
-}
-
+	}
 }
 
 
