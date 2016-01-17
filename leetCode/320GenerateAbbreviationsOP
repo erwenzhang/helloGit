@@ -1,0 +1,25 @@
+public class Solution {
+    List<String> rets;
+    public List<String> generateAbbreviations(String word){
+    	rets = new ArrayList<String>();
+    	StringBuilder sb = new StringBuilder();
+    	dfs(word,sb,0,0);
+    	return rets;
+    
+    }
+    public void dfs(String word,StringBuilder sb,int index,int count){
+    	int len = sb.length();
+    	if(index==word.length()){
+    		if(count!=0) sb.append(count);
+    		rets.add(sb.toString());
+        }else{
+        	dfs(word,sb,index+1,count+1);
+        	if(count!=0) sb.append(count);
+        	dfs(word,sb.append(word.charAt(index)),index+1,0);
+       
+        }
+     sb.setLength(len);
+    	
+    }
+
+}
