@@ -1,0 +1,40 @@
+public List<Character> findDifference(String str1, String str2){
+	int[] count = new int[256];
+	List<Character> results = new ArrayList<>();
+	String str = str1.length()<str2.length()?str1:str2;
+	
+	for(int i = 0; i<str.length();i++){
+		count[str.charAt(i)] = 1;
+}
+str = str1.length()<str2.length()?str2:str1;
+for(int i = 0;i<str.length();i++){
+	if(count[str.charAt(i)]!=1) results.add(str.charAt(i));
+}
+return results;
+}
+
+public List<Character> findDifference(String str1, String str2){
+   List<Character> results = new ArrayList<>();
+   long num1 = 0;
+   long num2 = 0;
+   for(int i = 0; i<str1.length();i++){
+       int dis = str1.charAt(i)-'A';
+       num1=num1|(1<<dis);
+   }
+
+   for(int i = 0;i<str2.length();i++){
+       int dis = str2.charAt(i)-'A';
+       num2=num2|(1<<dis);
+   }
+   long num3 = (num1^num2);
+   int index = 0;
+   while(num3!=0){
+
+       if((num3&1)==1) results.add((char)(index+'A'));
+       num3 = num3>>1;
+       index++;
+   }
+   return results;
+}
+
+
