@@ -1,0 +1,66 @@
+public class Solution {
+   private int findKthNumber(int[] num,int k){
+    int lo = 0;
+    int hi = num.length-1;
+   while(lo<hi){
+       int l = lo;
+       int i = l;
+       int h = hi;
+       int pivot = num[lo];
+       while(i<=h){
+           if(num[i]<pivot) swap(num,l++,i++);
+           else if(num[i]==pivot) i++;
+           else{
+               swap(num,i,h--);
+           }
+
+       }
+       if(k>=l&&k<=h) return num[l];
+       else if(k<l) hi = l-1;
+       else lo = h+1;
+
+   }
+   return num[lo];
+
+}
+public void swap(int[] num,int i, int j){
+   int tmp = num[i];
+   num[i] = num[j];
+   num[j] = tmp;
+
+}
+public void wiggleSort(int[] nums){
+	int k;
+	int n = nums.length;
+    k = nums.length/2;
+ 	int median = findKthNumber(nums,k);
+	int lo = 0;
+	int hi = n-1;
+	int cur = lo;
+
+	int v_cur = (cur*2+1)%(n|1);
+		int v_lo = (lo*2+1)%(n|1);
+		int v_hi = (hi*2+1)%(n|1);
+	while(cur<=hi){
+		
+		if(nums[v_cur]>median){ 
+		    swap(nums,v_lo,v_cur);
+			cur++;lo++;
+			v_cur = (cur*2+1)%(n|1);
+			v_lo = (lo*2+1)%(n|1);
+        }
+        else if(nums[v_cur]==median){
+	         cur++;
+	         v_cur = (cur*2+1)%(n|1);
+        }
+        else{
+    	    swap(nums,v_cur,v_hi);
+    	    hi--;
+    	    v_hi = (hi*2+1)%(n|1);
+        }
+    }
+	
+}
+
+
+}
