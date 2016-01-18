@@ -1,0 +1,31 @@
+public class Codec{
+	private static final String splitter = ",";
+	private static final String NN = "X";
+	public String serialize(TreeNode root){
+		StringBuilder sb = new StringBuilder();
+        buildString(root,sb);
+        return sb.toString();
+}
+public void buildString(TreeNode root, StringBuilder sb){
+	if(root==null){ sb.append(NN).append(splitter);return;}
+	sb.append(root.val).append(splitter);
+	buildString(root.left,sb);
+	buildString(root.right,sb);
+}
+
+public TreeNode deserialize(String encode_str){
+	String[] strings = encode_str.split(splitter);
+	Queue<String> strQueue = new LinkedList<>(Arrays.asList(strings));
+	return buildTree(strQueue);
+}
+public TreeNode buildTree(Queue<String> strQueue){
+	String val = strQueue.poll();
+	if(val.equals(NN)) return null;
+	TreeNode treeNode = new TreeNode(Integer.parseInt(val));
+	treeNode.left = buildTree(strQueue);
+	treeNode.right = buildTree(strQueue);
+	return treeNode;
+
+}
+
+}
