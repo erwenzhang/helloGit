@@ -1,0 +1,63 @@
+public class Solution {
+    private int findKthNumber(int[] num,int k){
+    int lo = 0;
+    int hi = num.length-1;
+   while(lo<hi){
+       int l = lo;
+       int i = l;
+       int h = hi;
+       int pivot = num[lo+(int)(Math.random()*(hi-lo))];
+       while(i<=h){
+           if(num[i]<pivot) swap(num,l++,i++);
+           else if(num[i]==pivot) i++;
+           else{
+               swap(num,i,h--);
+           }
+
+       }
+       if(k>=l&&k<=h) return num[l];
+       else if(k<l) hi = l-1;
+       else lo = h+1;
+
+   }
+   return num[lo];
+
+}
+
+
+private void swap(int[] num,int i, int j){
+   int tmp = num[i];
+   num[i] = num[j];
+   num[j] = tmp;
+
+}
+  public void wiggleSort(int[] nums){
+	int k;
+	int n = nums.length;
+    k = nums.length/2;
+ 	int median = findKthNumber(nums,k);
+	int lo = 0;
+	int hi = n-1;
+	int cur = lo;
+	while(cur<=hi){
+		
+		if(nums[(cur*2+1)%(n|1)]>median){ 
+		    swap(nums,(lo*2+1)%(n|1),(cur*2+1)%(n|1));
+		    cur++;
+		    lo++;
+        }
+        else if(nums[(cur*2+1)%(n|1)]==median){
+	  	    cur++;
+        }
+        else{
+    	    swap(nums,(cur*2+1)%(n|1),(hi*2+1)%(n|1));
+    	    hi--;
+        }
+    }
+	
+}
+
+
+
+}
+
