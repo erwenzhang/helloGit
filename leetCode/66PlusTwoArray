@@ -1,0 +1,26 @@
+public int[] addPlus(int[] digit1, int[] digit2){
+        int len1 = digit1.length;
+        int len2 = digit2.length;
+        int[] digit = new int[Math.max(len1,len2)];
+        int len3 = digit.length;
+        int i,j,k;
+        int carry = 0;
+        for(i = len1-1,j=len2-1,k=len3-1;i>=0||j>=0;i--,j--,k--){
+            int x = (j>=0)?digit2[j]:0;
+            int y = (i>=0)?digit1[i]:0;
+            int sum = (x+y+carry)%10;
+            carry = (x+y+carry)/10;
+            digit[k] = sum;
+            if(k==0){
+                    int[] newdigit = new int[len3+1];
+                    newdigit[0] = 1;
+                    System.arraycopy(digit,0,newdigit,1,len3);
+                    return newdigit;
+            }
+
+
+        }
+        return digit;
+
+
+    }
