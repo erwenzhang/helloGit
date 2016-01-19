@@ -1,0 +1,45 @@
+public class Solution {
+    public int lengthOfLongestSubstringTwoDistinct(String str){
+	    char[] array = str.toCharArray();
+	    if(array.length==0) return 0;
+	    char pre = array[0];
+	    char pre_pre = pre;
+	    int longest = 0;
+	    int pointer = 0;
+	    int i;
+        int pre_loc = 0;
+        int pre_pre_loc = 0;
+	    for(i = 1;i<str.length();i++){
+		    char key = str.charAt(i);
+		    if(key!=pre&&key!=pre_pre){
+		        
+	
+		        if(pre_pre!=pre){
+		            longest = Math.max(longest,i-pointer);
+		         //   System.out.println(longest);
+		            char pre_key = str.charAt(i-1);
+		            if(pre_key==pre){ pointer = pre_pre_loc+1; pre_pre = pre;pre_pre_loc=pre_loc;}
+		            else {pointer = pre_loc+1; }
+		        //   System.out.println(pointer);
+		        } 
+		        pre=key;
+		        pre_loc = i;
+		        
+		    }else if(key==pre){
+		        if(pre==pre_pre) pre_pre_loc = i;
+		           pre_loc = i;
+		   
+		    }
+		    else{
+		        pre_pre_loc = i;
+		    //longest = longest+1;
+		        
+		    }
+            
+            
+        }
+        longest = Math.max(longest,i-pointer);
+        return longest;
+
+    }
+}
