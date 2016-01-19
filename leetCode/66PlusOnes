@@ -1,0 +1,21 @@
+public int[] addPlus(int[] digit, int plus){
+	for(int i = digit.length-1;i>=0;i--){
+		int sum = digit[i]+plus;
+		if(sum>9){
+			digitals[i] = sum-10;
+			if(i==0){
+    	    int[] newdigit = new int[digit.length+1];
+    	    System.arrayCopy(digital,0,newdigit,1,digit.length);
+          newdigit[0]=1;
+          return newdigit;
+      }else{
+          plus = 1;
+      }
+    }else{
+    	digit[i] = sum;
+    	return digit;
+    }
+}
+return digit;
+
+}
