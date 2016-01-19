@@ -1,0 +1,28 @@
+public int minBinary(int num){
+  	int count_one = 0;
+  	int count_binary = 0;
+    while(num>0){
+  		if((num&1)==1) {
+        count_one++;
+  	
+      }else{
+      	if(count_one>=2){
+      	  count_binary++;
+      	  count_one = 1;	
+  	
+        }else{
+  
+    		  count_binary+=count_one;
+          count_one = 0;
+        }
+  
+  
+    }
+      num = num>>1;
+  
+  	
+    }
+  if(count_one>=2) count_binary+=2;
+  else count_binary+=count_one;
+  return count_binary;
+}
