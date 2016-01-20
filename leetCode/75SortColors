@@ -1,0 +1,21 @@
+public class Solution {
+    public void sortColors(int[] nums) {
+        int lo = 0,cur = lo,hi = nums.length-1;
+        while(cur<=hi){
+            if(nums[cur]<1){
+                swap(nums,cur++,lo++);
+            }else if(nums[cur]==1){
+                cur++;
+            }else{
+                swap(nums,cur,hi--);
+            }
+            
+        }
+        
+    }
+    public void swap(int[] nums,int i,int j){
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
