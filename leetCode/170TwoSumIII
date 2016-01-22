@@ -1,0 +1,30 @@
+public class TwoSum{
+  HashMap<Integer,Integer> map = new HashMap<>();
+    // Add the number to an internal data structure.
+	public void add(int x){
+		Integer tmp = map.get(x);
+		map.put(x,tmp==null?1:tmp+1);
+	    
+	}
+    public boolean find(int target){
+        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+    	    int add = target - entry.getKey();
+    	    if(map.containsKey(add)){
+    		    if(add != entry.getKey()) return true;
+    		    else{
+    			    if(entry.getValue()>=2) return true;
+                }
+            }
+
+        }	
+	    return false;
+    }
+}
+
+
+
+
+// Your TwoSum object will be instantiated and called as such:
+// TwoSum twoSum = new TwoSum();
+// twoSum.add(number);
+// twoSum.find(value);
