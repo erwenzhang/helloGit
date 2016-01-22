@@ -1,0 +1,19 @@
+public int shortestWordDistance(String[] words,String word1,String word2){
+	HashMap<String,ArrayList<Integer>> map = new HashMap<>();
+	for(int i = 0;i<words.length;i++){
+		ArrayList<Integer> tmp = map.get(words[i]);
+		if(tmp==null) tmp = new ArrayList<>();
+		tmp.add(i);
+		map.put(words[i],tmp);
+  }
+	ArrayList<Integer> list1 = map.get(word1);
+  ArrayList<Integer> list2 = map.get(word2);
+  int min  = Integer.MAX_VALUE;
+  for(Integer index1:list1){
+	  for(Integer index2:list2)
+      if(index1!=index2)// [“a”,”a”]
+      		min = Math.min(min,Math.abs(index1-index2));
+  }
+  return min;
+
+}
