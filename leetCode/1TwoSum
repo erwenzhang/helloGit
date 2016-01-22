@@ -1,0 +1,26 @@
+public class Solution {
+    public int[] twoSum(int[] nums,int target){
+	    int[] results = new int[2];
+        if(nums==null||nums.length<=1) return results;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i = 0;i<nums.length;i++){
+	        map.put(nums[i],i+1);
+        }
+
+	    for(int i = 0;i<nums.length;i++){
+	        int add = target - nums[i];
+	        if(map.containsKey(add)){
+	            int index1 = i+1;
+	            int index2 = map.get(add);
+	            if(index1==index2) continue;
+	            results[0] = index1;
+	            results[1] = index2;
+	            break;
+	            
+	        }
+	        
+	    }
+        return results;
+    }
+
+}
