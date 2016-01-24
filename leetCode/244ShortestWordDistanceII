@@ -1,0 +1,32 @@
+public class WordDistance {
+
+ 
+	Map<String,ArrayList<Integer>> map;
+	public WordDistance(String[] words){
+		map = new HashMap<>();
+		for(int i = 0;i<words.length;i++){
+			ArrayList<Integer> tmp = map.get(words[i] );
+			if (tmp==null) tmp = new ArrayList<>();
+			tmp.add(i);
+			map.put(words[i],tmp);
+        }
+		
+    }
+    public int shortest(String word1,String word2){
+        ArrayList<Integer> list1 = map.get(word1);
+        ArrayList<Integer> list2 = map.get(word2);
+        int min  = Integer.MAX_VALUE;
+        for(int i = 0;i<list1.size();i++){
+            int tmp_min  = Integer.MAX_VALUE;
+            for(int j=list2.size()-1;j>=0;j--){
+                int tmp =  Math.abs(list1.get(i)-list2.get(j));
+                if(tmp>tmp_min) break;
+                else tmp_min = tmp;
+                
+            }
+        	min = Math.min(tmp_min,min);
+        }
+        return min;
+    }
+
+}
