@@ -1,0 +1,18 @@
+public class Solution {
+  public int maxProfit(int[] nums){
+	if(nums == null||nums.length == 0) return 0;
+	int len = nums.length;
+    int release1 = 0;
+    int release2 = 0;
+    int hode1 = -nums[0];
+    int hode2 = -nums[0];
+    for(int i = 1;i<nums.length;i++){
+        hode1 = Math.max(hode1,0-nums[i]);
+        release1 = Math.max(release1,hode1 + nums[i]);
+        hode2 = Math.max(hode2,release1 - nums[i]);
+    	  release2 = Math.max(release2,hode2 + nums[i]);
+    }
+	return release2;
+}
+
+}
