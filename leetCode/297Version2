@@ -1,0 +1,54 @@
+public class Codec{
+	private static final String splitter = ",";
+	private static final String NN = "X";
+	int index = 1;
+	public String serialize(TreeNode root){
+	    StringBuilder sb = new StringBuilder();
+	    code_dfs(root,sb);
+    	return sb.toString();
+    }
+    public void code_dfs(TreeNode root,StringBuilder sb){
+	    if(root == null){ 
+            sb.append(NN).append(splitter);
+            return;
+        }
+        sb.append(root.val).append(splitter);
+	    code_dfs(root.left,sb);
+	    code_dfs(root.right,sb);
+
+    }
+
+    public TreeNode deserialize(String str){
+    	String[] nodes = str.split(splitter);
+    	if(nodes[0].equals(NN)) return null;
+    	TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
+        decode_dfs(nodes,root);
+        return root;
+    }
+    public void decode_dfs(String[] nodes,TreeNode root){
+    	
+    	if(nodes[index].equals(NN)){
+    		root.left = null;
+    		index++;
+        }else{
+    		TreeNode left = new TreeNode(Integer.parseInt(nodes[index]));
+    		root.left = left;
+    		index++;
+    		decode_dfs(nodes,left);
+        }
+    	if(!nodes[index].equals(NN)){
+    		TreeNode right = new TreeNode(Integer.parseInt(nodes[index]));
+    		root.right = right;
+    		index++;
+    		decode_dfs(nodes,right);
+        }else{
+        	root.right = null;
+        	index++;
+        }
+	
+
+    }
+
+
+
+}
