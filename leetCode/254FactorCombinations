@@ -1,0 +1,23 @@
+public class Solution {
+    public List<List<Integer>> getFactors(int n){
+        List<List<Integer>> results = new ArrayList<>();
+    	if(n==1) return results;
+    	dfs(results,new ArrayList<Integer>(),n,2);
+    	return results;
+    }
+    public void dfs(List<List<Integer>> results,ArrayList<Integer> factor,int n,int start){
+    
+        if(factor.size()>0){
+            factor.add(n);
+            results.add(new ArrayList<Integer>(factor));
+            factor.remove(factor.size()-1);
+        }
+        for(int i = start;i<=Math.sqrt(n);i++){
+        	if(n%i==0){
+        		factor.add(i);
+        		dfs(results,factor,n/i,i);
+        		factor.remove(factor.size()-1);
+            }
+        }
+    }
+}
