@@ -12,5 +12,18 @@ public class Solution {
         }
         return money[nums.length-1];
     }
+    // do not use extra space , just use nums,
+    public int rob(int[] nums){
+	    if(nums==null||nums.length==0) return 0;
+	    if(nums.length == 1) return nums[0];
+	    nums[1] = Math.max(nums[1],nums[0]);
+	    int tmp_max = nums[0];
+	    for(int i = 2;i<nums.length;i++){
+    		nums[i] = Math.max(nums[i-1],nums[i]+tmp_max);
+    		tmp_max = Math.max(tmp_max,nums[i-1]);
+    	
+        }
+        return nums[nums.length-1];
+    }
 
 }
