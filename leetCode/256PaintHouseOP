@@ -1,0 +1,18 @@
+public class Solution {
+  public int minCost(int[][] costs){
+  	if(costs==null||costs.length==0) return 0;
+  	int n = costs.length;
+  	int cost1 = 0,cost2 = 0, cost3 = 0;
+    int min = 0,min_sec = 0;
+    for(int i = 0;i<n;i++){
+		    cost3 = (min==cost3?min_sec:min)+costs[i][2];
+		    cost2 = (min==cost2?min_sec:min)+costs[i][1];
+        cost1 = (min==cost1?min_sec:min)+costs[i][0];
+        min = Math.min(Math.min(cost3,cost2),cost1);
+        if(min == cost3) min_sec = Math.min(cost1,cost2);
+        else if(min == cost2) min_sec = Math.min(cost3,cost1);
+        else{min_sec = Math.min(cost3,cost2);}
+    }
+    return min;
+    }
+}
