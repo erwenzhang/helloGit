@@ -1,0 +1,27 @@
+public class Solution {
+    public int minCostII(int[][] costs){
+	    if(costs==null||costs.length==0) return 0;
+	    int k = costs[0].length;
+	    int n = costs.length;
+	    int[] minCost = new int[k];
+        int min = 0,second_min = 0;
+        for(int i = 0;i<n;i++){
+            int min_cur = Integer.MAX_VALUE;
+            int min_sec = Integer.MAX_VALUE;
+            for(int j = 0;j<k;j++){
+		        minCost[j]=(minCost[j]==min?second_min:min)+costs[i][j];
+    		    if(minCost[j]<min_cur){
+                    min_sec = min_cur;
+    			    min_cur = minCost[j];		
+                }else if(minCost[j]<min_sec){
+    	            min_sec = minCost[j];
+                }
+            }
+        min = min_cur;
+        second_min = min_sec;
+    }
+    return min;
+
+    }
+
+}
