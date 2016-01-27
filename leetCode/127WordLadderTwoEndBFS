@@ -1,0 +1,63 @@
+public class Solution {
+    public int ladderLength(String begin,String end,Set<String> lists){
+	    Queue<String> b_queue = new LinkedList<>();
+	    Queue<String> e_queue = new LinkedList<>();
+	    b_queue.add(begin);
+      b_queue.add(null);
+	    e_queue.add(end);
+      e_queue.add(null);
+	    int level1 = 2;
+	    Map<String,Integer> map = new HashMap<>();
+	    map.put(begin,1);
+	    map.put(end,2);
+	    while(!b_queue.isEmpty()&&!e_queue.isEmpty()){
+		    while(b_queue.peek()!=null){
+    			String str1 = b_queue.poll();
+    			if(findNext(lists,b_queue,str1,map,1))
+    				return level1;
+            }
+            b_queue.poll();
+            if(!b_queue.isEmpty()){
+                b_queue.add(null);
+                level1++;
+            }else{ break;}
+            while(e_queue.peek()!=null){
+                String str2 = e_queue.poll();
+                if(findNext(lists,e_queue,str2,map,2))
+			        return level1;		
+            }
+             e_queue.poll();
+            if(!e_queue.isEmpty()){
+                e_queue.add(null);
+                level1++;
+            }else{ break;}
+        }
+        return 0;
+    }
+    public boolean findNext(Set<String> lists,Queue<String> queue,String str,Map<String,Integer> map,int mark){
+	    for(int i = 0;i<str.length();i++){
+		    char[] tmp_str = str.toCharArray();
+		    for(char tmp = 'a';tmp<='z';tmp++){
+			    tmp_str[i] = tmp;
+			    String tmp_str_str = new String(tmp_str);
+			    if(lists.contains(tmp_str_str)){
+	                if(map.get(tmp_str_str)==null){
+	                    map.put(tmp_str_str,mark);
+	                    queue.add(tmp_str_str);
+                    }else{
+	                    if(map.get(tmp_str_str)== mark)
+		                    continue;
+    	                else{
+    	                        return true;
+                        }
+                    }
+                }   
+            }
+        }
+        return false;
+    }   
+}
+
+ 
+
+
