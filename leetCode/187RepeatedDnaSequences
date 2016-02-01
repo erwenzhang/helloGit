@@ -14,3 +14,19 @@ public class Solution {
         return results;
     }
 }
+
+
+public class Solution {
+    public List<String> findRepeatedDnaSequences(String DNA){
+        List<String> results = new ArrayList<>();
+        Set<String> firstTime = new HashSet<>();
+        Set<String> secondTime = new HashSet<>();
+        for(int i = 0;i+10<=DNA.length();i++){
+        	String tmp = DNA.substring(i,i+10);
+        	if(!firstTime.add(tmp)&&secondTime.add(tmp)){
+            	results.add(tmp);
+            }
+        }
+        return results;
+    }
+}
