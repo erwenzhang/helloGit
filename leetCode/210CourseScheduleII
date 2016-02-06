@@ -1,0 +1,49 @@
+public class Solution {
+    public int[] findOrder(int num,int[][] prerequisites){
+    	int[] order = new int[num];
+        if(prerequisites == null||prerequisites.length==0){
+    		for(int i = 0;i<num;i++){
+    			order[i] = i;
+            }
+            return order;
+        }
+        // construct graph and store it as a adjacency list
+        ArrayList<Integer>[] graph = new ArrayList[num];
+        int[] incomings = new int[num];
+        int edges = prerequisites.length;
+        for(int[] edge: prerequisites){
+    	    if(graph[edge[1]]==null) 
+                graph[edge[1]] = new ArrayList<Integer>();
+            graph[edge[1]].add(edge[0]);
+            incomings[edge[0]]++;
+        }
+        Queue<Integer> source_node = new LinkedList<>();
+        int order_i = 0;
+        // find all source nodes
+        for(int i = 0;i<num;i++){
+    	    if(incomings[i]==0){
+    	       source_node.add(i); 
+    	    }
+             
+         }
+         // bfs traverse the graph from source node
+         while(!source_node.isEmpty()){
+             int source =  source_node.poll();
+             order[order_i++] = source;
+             if(graph[source]==null) continue;
+    		 for(int node:graph[source]){	
+    			    if(--incomings[node]==0){
+    				    source_node.add(node);
+                    }
+    			edges--;
+            }
+         }
+        if(edges > 0)return new int[0];
+        else{
+    	    return order;
+        }
+
+    }
+
+
+}
