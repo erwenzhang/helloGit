@@ -15,11 +15,8 @@ public class Solution {
     
     public UndirectedGraphNode helper(UndirectedGraphNode node,Map<Integer,UndirectedGraphNode> visited){
         if(visited.containsKey(node.label)) return visited.get(node.label);
-	    UndirectedGraphNode tmp = new UndirectedGraphNode(node.label);
-	    visited.put(node.label,tmp);
-        if(node.neighbors.size()== 0){
-		    return tmp;
- 	    }
+	UndirectedGraphNode tmp = new UndirectedGraphNode(node.label);
+	visited.put(node.label,tmp);
         for(UndirectedGraphNode neighbor:node.neighbors){
 	        tmp.neighbors.add(helper(neighbor,visited));
         }
