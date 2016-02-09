@@ -1,0 +1,19 @@
+public class Solution {
+  public boolean isValidSerialization(String preorder){
+  	Stack stack = new Stack();
+  	if(preorder == null||preorder.length()== 0)     
+          return true;
+      String[] array = preorder.split(",");
+      for(String tmp:array){
+  	    if(tmp.equals("#")){
+  			  while(!stack.isEmpty()&&stack.peek().equals("#")){
+  			    stack.pop();
+  				  if(stack.isEmpty()) return false;
+  				  stack.pop();
+          }
+  	  	}
+        stack.push(tmp);
+      }
+    return (stack.pop().equals("#")&&stack.size()==0);
+	}
+}
