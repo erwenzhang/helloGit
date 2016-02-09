@@ -1,0 +1,52 @@
+public class WordDictionary{
+
+	private class trieNode{
+		trieNode[] children = new trieNode[26];
+		boolean exist;
+    }
+    
+    private trieNode root = new trieNode();
+
+	public void addWord(String word){
+		trieNode p = root;
+		char[] array = word.toCharArray();
+        for(char cur:array){
+	        if(p.children[cur-'a']==null)
+		        p.children[cur-'a'] = new trieNode();
+	        p = p.children[cur-'a'];
+        }
+        p.exist = true;
+    }
+
+    public boolean search(String word){
+        return search_helper(root,word);
+    }
+
+    public boolean search_helper(trieNode root,String word){
+	    trieNode p = root;
+	    if(word == null||word.length()==0) return p.exist;
+        for(int i = 0;i<word.length();i++){
+	        char cur = word.charAt(i);
+            if(cur=='.') {
+                for(int j = 0;j<26;j++){
+	                trieNode tmp = p.children[j];
+	                if(tmp!=null)
+    			    if(search_helper(tmp,word.substring(i+1)))
+    			        return true;
+                }
+            return false;
+            }else{
+                if(p.children[cur-'a']==null)
+		            return false;
+	            p = p.children[cur-'a'];
+            }
+        }
+        return p.exist;
+    }
+
+}
+
+// Your WordDictionary object will be instantiated and called as such:
+// WordDictionary wordDictionary = new WordDictionary();
+// wordDictionary.addWord("word");
+// wordDictionary.search("pattern");
