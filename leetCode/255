@@ -1,0 +1,25 @@
+public class Solution {
+   public boolean verifyPreorder(int[] preorder){
+       if(preorder==null||preorder.length==0) return true;
+	return verify(preorder,0,preorder.length-1);
+}
+
+    public boolean verify(int[] preorder,int start,int end){
+        if(start==end) return true;
+    	if(start>end) return false;
+            int root = preorder[start];
+    	    int index = end+1;
+            for(int i = start+1;i<=end;i++){
+    		    if(preorder[i]>root){
+    			    index = i;
+    			    break;
+                }	
+            }   
+        for(int j = index;j<=end;j++){
+        	if(preorder[j]<root) return false;
+        }
+        if(index>end) return verify(preorder,start+1,index-1);
+        if(index == start+1) return verify(preorder,index,end);
+        return verify(preorder,start+1,index-1)&&verify(preorder,index,end);
+    }
+}
