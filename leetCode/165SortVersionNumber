@@ -11,7 +11,7 @@ public int compareVersion(String s1,String s2){
 }
 
 public void sortVersionNum(String[] versions){	
-	sort(versions,0,versions.length);
+	sort(versions,0,versions.length-1);
 }
 public void sort(String[] versions,int lo,int hi){
 String pivot = version[(int)(Math.random()*(hi-lo))];
