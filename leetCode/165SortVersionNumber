@@ -14,7 +14,8 @@ public void sortVersionNum(String[] versions){
 	sort(versions,0,versions.length-1);
 }
 public void sort(String[] versions,int lo,int hi){
-String pivot = version[(int)(Math.random()*(hi-lo))];
+if(lo>=hi) return;
+String pivot = version[lo+(int)(Math.random()*(hi-lo))];
 	int cur = lo;
 	int l = lo;
 	int h = hi;
@@ -26,7 +27,7 @@ String pivot = version[(int)(Math.random()*(hi-lo))];
 	swap(versions,cur++,l++);
 }
 }
-sort(versions,lo,l);
-sort(versions,h,hi);
+sort(versions,lo,l-1); //[l,h] is pivot range.
+sort(versions,h+1,hi);
 
 }
