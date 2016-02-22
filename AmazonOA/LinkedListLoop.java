@@ -18,7 +18,7 @@ public class LinkedListLoop{
         while(fast.next!=null&&fast.next.next!=null){
             slow = slow.next;
             fast = fast.next.next;
-            if(slow = fast){
+            if(slow == fast){
                 while(entry!=slow){
                     entry = entry.next;
                     slow = slow.next;
