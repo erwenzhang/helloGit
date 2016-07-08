@@ -1,7 +1,8 @@
 public List<List<Integer>> threeSum(int[] nums){
+  List<List<Integer>> result = new ArrayList<>();
   if(nums == null || nums.length < 3) return result;
   Arrays.sort(nums);
-  List<List<Integer>> retsult = new ArrayList<>();
+
   int len = nums.length;
   for(int i = 0; i < len; i++) {
       if(i > 0 && nums[i] == nums[i - 1]) continue;        // Skip same results
