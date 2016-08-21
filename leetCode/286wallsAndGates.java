@@ -1,9 +1,11 @@
 public class Solution {
     public void wallsAndGates(int[][] rooms){
-	    for(int i = 0;i<rooms.length;i++){
-		    for(int j = 0;j<rooms[0].length;j++){
-				    if(rooms[i][j]==0) update(i,j,rooms,0);
-            }
+    	for(int i = 0;i<rooms.length;i++){
+    		for(int j = 0;j<rooms[0].length;j++){
+    			if(rooms[i][j]==0) {
+		            update(i,j,rooms,0);
+		        }
+                }
         }
     }
 
