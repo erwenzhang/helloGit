@@ -23,7 +23,7 @@ public class Solution {
     }
 
     public static class Graph{
-        Map<Integer,Set<Integer>>[] edges = new HashMap<Integer,Set<Integer>>();
+        Map<Integer,Set<Integer>> edges = new HashMap<Integer,Set<Integer>>();
         Graph(int[][] edges, int n){
             for(int i = 0;i<n;i++){
                 edges.put(i,new HashSet<Integer>());
