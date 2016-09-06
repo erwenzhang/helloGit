@@ -7,13 +7,12 @@ public class PlusOneLinkedList{
     while(p!=null){
        int sum = p.val + plus;
        p.val = sum%10;
-       if(sum>9){
-          if(p.next==null){
-              p.next = new ListNode(1);
-              break;
-          }
-       }else{
+       if(sum<=9){
          break;
+       } 
+       if(p.next==null){
+          p.next = new ListNode(1);
+          break;
        }
        p=p.next;
     }
