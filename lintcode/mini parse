@@ -1,0 +1,39 @@
+  public NestedInteger deserialize(String s){
+        if(s.charAt(0)!='['){
+            return new NestedInteger(Integer.parseInt(s));
+        }
+
+        Stack<NestedInteger> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < s.length(); i++){
+            switch (s.charAt(i)){
+                case '[':
+                    stack.push(new NestedInteger());
+                    break;
+                case ']':
+                    if(sb.length()!=0){
+                        stack.peek().add(new NestedInteger(Integer.parseInt(sb.toString())));
+                        sb.delete(0,sb.length());
+                    }
+                    NestedInteger tmp = stack.pop();
+                    if(!stack.isEmpty()){
+                        stack.peek().add(tmp);
+                    }else{
+                        return tmp;
+                    }
+                    break;
+                case ',':
+                    if(sb.length()!=0){
+                        stack.peek().add(new NestedInteger(Integer.parseInt(sb.toString())));
+                        sb.delete(0,sb.length());
+                    }
+                    break;
+                default:
+                    sb.append(s.charAt(i));
+                    break;
+
+            }
+        }
+        return null;
+    }
