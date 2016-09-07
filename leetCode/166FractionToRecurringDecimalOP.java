@@ -14,8 +14,6 @@ public class Solution {
             return sb.toString();
         }
         sb.append('.');
-       // String str2 = "";
-      //  int count = 0;
         while(!recursion.containsKey(remainder)){
             recursion.put(remainder,sb.length());
             remainder*=10;
@@ -25,14 +23,10 @@ public class Solution {
             if(remainder == 0){
                 return sb.toString();
             }
-
         }
         int count = recursion.get(remainder);
         sb.insert(count,'(');
         sb.append(')');
         return sb.toString();
-
-
-
     }
 }
