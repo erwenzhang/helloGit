@@ -10,7 +10,7 @@ public double myPow(double x,int n){
 public double myPow(double x,int n){
 	if(n==0) return 1;
 	if(n<0){
-	  n = -n;
+	  n = -n; // wrong!! -2^31*-1 will be out of bound!!!
 	  x = 1/x;
   }
   double t = myPow(x*x,n/2);
