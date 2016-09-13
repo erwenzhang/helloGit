@@ -23,10 +23,5 @@ public class Solution {
     	    permutation.remove(index);
     	    flag[i] = false;
         }
-    	
-    
     }
-
-
-
 }
