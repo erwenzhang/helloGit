@@ -26,5 +26,5 @@ public List<String> summarizeRange(int[] nums){
     }
 
     public String generateString(int start, int end, int pace){
-        return String.format("%d-%d/%d", start, end, pace);
+        return pace==-1?String.valueOf(end):String.format("%d-%d/%d", start, end, pace);
     }
