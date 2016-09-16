@@ -5,7 +5,7 @@ public int nthUglyNumber(int n) {
 
     for(long i=1; i<n; i++) {
         long tmp = q.poll();
-        while(!q.isEmpty() && q.peek()==tmp) tmp = q.poll();
+        while(!q.isEmpty() && q.peek()==tmp) tmp = q.poll(); //remove duplicate element,
 
         q.add(tmp*2);
         q.add(tmp*3);
