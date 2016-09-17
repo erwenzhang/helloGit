@@ -8,27 +8,24 @@
  * }
  */
 public class Solution {
-   public int kthSmallest(TreeNode root, int k){
-	Stack stack = new Stack();
-    while(root!=null){
-        stack.push(root);
-	    root = root.left;
-    }
-    return traversal(stack,k,1);
-}
-    public int traversal(Stack stack, int k,int count){
-    	while(!stack.isEmpty()) {
-    		TreeNode cur = (TreeNode)stack.pop();
-            if(k==count){return cur.val;}
-            cur = cur.right;
-            while(cur!=null){
-                stack.push(cur);
-                cur = cur.left;
-            }
-    	    count++;
+    public int kthSmallest(TreeNode root, int k){
+        Stack<TreeNode> stack = new Stack<>();
+        while(root!=null){
+            stack.push(root);
+            root = root.left;
         }
-        return Integer.MIN_VALUE;
+        int count = 1;
+        while(!stack.isEmpty()){
+            if(k == count){
+                break;
+            }
+            count++;
+            TreeNode tmpRoot = stack.pop().right;
+            while(tmpRoot!=null){
+                stack.push(tmpRoot);
+                tmpRoot = tmpRoot.left;
+            }
+        }
+        return stack.pop().val;
     }
-
-
 }
