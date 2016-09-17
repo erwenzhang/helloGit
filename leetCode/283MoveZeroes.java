@@ -14,26 +14,24 @@ public class Solution {
 
 
 public class Solution {
-    public void moveZeroes(int[] nums){
-	    int i = 0;
-	    int j = 1;
-	    while(i<nums.length){
-		    if(nums[i]==0){
-                while(j<nums.length&&nums[j]==0){
-                    j++;
-                }
-                if(j==nums.length) break;
-                swap(nums,i,j);
-            }
-            i++;
-            if(j<=i) j = i+1;
-        }
+    public void moveZeroes(int[] nums) {
+        if(nums==null) return;
+        int zeroIndex = 0;
+        int nonZeroIndex = 0;
+        while(zeroIndex < nums.length&&nonZeroIndex< nums.length){
+            if(nums[zeroIndex]!=0){
+                zeroIndex++;
+                nonZeroIndex = zeroIndex; //current nums[zeroIndex]!=0, and it doesn't need replacing, so set nonZeroIndex after zeroIndex++,
+                continue;
+            }   
+            if(nums[nonZeroIndex]==0){
+                nonZeroIndex++;
+                continue;
+            } 
+            nums[zeroIndex] = nums[nonZeroIndex];
+            nums[nonZeroIndex] = 0;
+            zeroIndex++;
+            nonZeroIndex++;
+        } 
     }
-    
-    public void swap(int[] nums,int i,int j){
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
-    }
-
 }
