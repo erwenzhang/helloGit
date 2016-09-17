@@ -8,16 +8,14 @@ public class TwoSum{
 	}
     public boolean find(int target){
         for(Map.Entry<Integer,Integer> entry:map.entrySet()){
-    	    int add = target - entry.getKey();
-    	    if(map.containsKey(add)){
-    		    if(add != entry.getKey()) return true;
-    		    else{
-    			    if(entry.getValue()>=2) return true;
-                }
-            }
-
+    	    int val = target - entry.getKey();
+    	    if(val == entry.getKey()){
+                if(entry.getValue()>=2) return true;
+            }else if(map.containsKey(val)){
+    	                return true;
+           }
         }	
-	    return false;
+	return false;
     }
 }
 
