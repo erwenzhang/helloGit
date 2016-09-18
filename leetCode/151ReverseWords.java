@@ -4,7 +4,8 @@ public String reverseWords(String s) {
           if(s.charAt(i)==' ') continue;
           int start = i;
           while(i>=0 && s.charAt(i)!=' ') i--;
-          sb.append(s.substring(i+1, start+1)).append(" ");
+          if(sb.length()!=0) sb.append(" ");
+          sb.append(s.substring(i+1, start+1));
     }
-    return sb.toString().trim();
+    return sb.toString();
 }
