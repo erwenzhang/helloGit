@@ -30,3 +30,19 @@ public ListNode mergeKLists(ListNode[] lists, int lo, int hi){
     int mid = lo+(hi-lo)/2;
     return mergeTwoLists(mergeKLists(lists,lo,mid),mergeKLists(lists,mid+1,hi));
 }
+
+//Another MergeKLists, divide conquer, 
+public ListNode mergeKLists(ListNode[] lists){
+    if(lists.length== 0||lists == null) return null;
+    int end = lists.length - 1;
+    while(end>0){
+        int begin = 0;
+        while(begin<end){
+           lists[begin] = mergeTwoLists(lists[begin],lists[end]);
+           end--;
+           begin++; 
+        }
+    }
+    return lists[0];
+}
+
