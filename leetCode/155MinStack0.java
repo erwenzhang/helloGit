@@ -30,6 +30,6 @@ class MinStack{
     }	
     public int getMin(){
     	if(head!=null) return head.min;
-    	    return -1;
+    	return -1;
     }
 }
