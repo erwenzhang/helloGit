@@ -8,13 +8,13 @@ public class Solution {
         int[] len = new int[]{xLen, yLen-1};
         int lenChoose = 0;
         int diffChoose = 0;
-        int x = -1;
-        int y = 0;
+        int col = -1;
+        int row = 0;
         while(len[lenChoose%2]!=0){
             for(int i = 0; i < len[lenChoose%2]; i++){
-                y = y+diff[1][diffChoose%4];
-                x = x+diff[0][diffChoose%4];
-                result.add(matrix[y][x]);
+                row = row+diff[1][diffChoose%4];
+                col = col+diff[0][diffChoose%4];
+                result.add(matrix[row][col]);
             }
             len[lenChoose%2]--;
             lenChoose++;
