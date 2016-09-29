@@ -26,3 +26,28 @@ public class Solution extends Reader4 {
         return readBytes;
     }
 }
+
+/*simpler and clearer solution*/
+public class Solution extends Reader4 {
+    /**
+     * @param buf Destination buffer
+     * @param n   Maximum number of characters to read
+     * @return    The number of characters read
+     */
+    private char[] buffer = new char[4];
+    private int offset = 0;
+    private int bufSize = 0;
+
+    public int read(char[] buf, int n){
+        int p = 0;
+        while(p<n){
+            if(offset == 0) bufSize = read4(buffer);
+            while(p<n&&offset<bufSize){
+                buf[p++] = buffer[offset++];
+            }
+            if(offset == bufSize) offset = 0; 
+            if(bufSize<4) break;
+       }
+       return p;
+   }
+}
