@@ -2,7 +2,7 @@ public class Solution {
     public List<String> letterCombinations(String digits) {
         List<String> combinations = new ArrayList<>();
         Map<Character, char[]> map = new HashMap<Character, char[]>();
-        if (digits == null || digits.equals("")) {
+        if (digits == null || digits.isEmpty()) {
             return combinations;
         }
         map.put('0', new char[] {});
