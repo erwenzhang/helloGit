@@ -8,13 +8,11 @@ public class Solution{
 
         for(int i = 1;i<len2+1;i++){
             if(str2.charAt(i-1)=='*'){
-                if(i>1){
-                    dp[0][i]=dp[0][i-2]||dp[0][i-1];
+                if(i==1){
+                    dp[0][i]=dp[0][i-1];  continue;
                 }
-                else
-                    dp[0][i]=true;
+                dp[0][i]=dp[0][i-2]||dp[0][i-1];    
             }
-
         }
 
         for(int i =1 ;i<len1+1;i++){
@@ -23,22 +21,15 @@ public class Solution{
                     dp[i][j]=dp[i-1][j-1];
                 }
                 else if(str2.charAt(j-1)=='*'){
-                    if(j>1){
-                        dp[i][j]=dp[i][j-1]||dp[i][j-2]||(dp[i-1][j]&&(str1.charAt(i-1)==str2.charAt(j-2)||str2.charAt(j-2)=='.'));
+                    if(j==1){
+                        dp[i][j]=dp[i][j-1]; continue;
                     }
-                    else{
-                        dp[i][j]=dp[i][j-1];
-                    }
+                    dp[i][j]=dp[i][j-1]||dp[i][j-2]||(dp[i-1][j]&&(str1.charAt(i-1)==str2.charAt(j-2)||str2.charAt(j-2)=='.'));                   
                 }
                 else
-                dp[i][j] = false;
+                    dp[i][j] = false;
             }
-
-
-
         }
         return dp[len1][len2];
-
-    }
-    
+    }    
 }
