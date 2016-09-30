@@ -1,39 +1,23 @@
-public class Solution{
+public class Solution {
     public boolean isMatch(String s, String p) {
-        int saved_p=-1, saved_s=-1;
-        int indexP=0;
-        for(int indexS=0; indexS<s.length();){
-            if(indexP<p.length() && (s.charAt(indexS)==p.charAt(indexP)||p.charAt(indexP)=='?')){
-                //match to a single character
-                indexP++;
-                indexS++;
-            }
-            else if(indexP<p.length() && p.charAt(indexP)=='*'){
-                // go into the * state, we need to save the P next position and save S next position
-                // when any mismatch happen, we can revert the search to it previous state '*'
-                saved_p=indexP;
-                //move the saved_s, next time it should skip current one
-                saved_s=indexS+1;
-                indexP++;
-            }
-            else if(saved_p!=-1){
-                //means not match, we need to revert 
-                indexP=saved_p;
-                indexS=saved_s;
-            }
-            else{
-                //means not match, but not wildcard
+        int len1 = s.length();
+        int len2 = p.length();
+        int sIndex, pIndex = 0, sS = -1, pS = -1;
+        for(sIndex = 0;sIndex<len1;){
+            if(pIndex<len2&&(s.charAt(sIndex)==p.charAt(pIndex)||p.charAt(pIndex)=='?')){
+                sIndex++;pIndex++; 
+            }else if(pIndex<len2&&p.charAt(pIndex)=='*'){
+                sS = sIndex; pS = pIndex; pIndex++; //sS and pS are used for backtracking
+            }else if(pS!=-1){
+                sS++; // previous one doesn't work
+                sIndex = sS; pIndex = pS + 1;
+            }else{ 
                 return false;
             }
-        }
-        //examine the left char in the pattern
-        //they should all be '*' if any char left
-        for(int index=indexP; index<p.length();index++){
-            if(p.charAt(index)!='*'){
-                return false;
-            }
+        }    
+        while(pIndex<len2){
+            if(p.charAt(pIndex++)!='*') return false;
         }
         return true;
     }
-    
 }
