@@ -1,9 +1,8 @@
 public class Solution{
-public boolean isMatch(String s, String p) {
+    public boolean isMatch(String s, String p) {
         int saved_p=-1, saved_s=-1;
         int indexP=0;
         for(int indexS=0; indexS<s.length();){
-
             if(indexP<p.length() && (s.charAt(indexS)==p.charAt(indexP)||p.charAt(indexP)=='?')){
                 //match to a single character
                 indexP++;
