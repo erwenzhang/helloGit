@@ -3,8 +3,8 @@ public class Solution {
 	if(nums == null||nums.length == 0) return 0;
 	int len = nums.length;
     	int [] profits = new int[len];
-        //profits[k][i] = Math.max(profits[k][i-1],profits[k-1][j]+nums[i]-nums[j]);
-       // Math.max(profits[k][i-1],nums[i]+max(profits[k-1][j]-nums[j]));
+        //profits[k][i] = Math.max(profits[k][i-1],profits[k-1][j-1]+nums[i]-nums[j]);
+       // Math.max(profits[k][i-1],nums[i]+max(profits[k-1][j-1]-nums[j]));
        // profits[i] is used to store the latest k 
    	if(K>=len/2){
     		int max = 0;
