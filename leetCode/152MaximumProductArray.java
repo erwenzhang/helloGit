@@ -11,17 +11,13 @@ public class Solution {
             min = Math.min(nums[i]*min,nums[i]);
         }
         else{
-        	int tmp = max;
+            int tmp = max;
             max = Math.max(nums[i]*min,nums[i]);
             min = Math.min(nums[i]*tmp,nums[i]);
         }	
         ret_max = Math.max(ret_max,max);
     
         }
-    	return ret_max;
-	
+    	return ret_max;	
     }
-
-
-
 }
