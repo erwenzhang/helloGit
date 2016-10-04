@@ -7,21 +7,25 @@
  * };
  */
 public class Solution {
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node){
-    	if(node == null) return null;
-        Map<Integer,UndirectedGraphNode> visited = new HashMap<>();
-        return helper(node,visited);
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if(node==null) return null;
+        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
+        UndirectedGraphNode head = new UndirectedGraphNode(node.label);
+        map.put(node, head);
+        helper(map, node);
+        return head;
     }
     
-    public UndirectedGraphNode helper(UndirectedGraphNode node,Map<Integer,UndirectedGraphNode> visited){
-        if(visited.containsKey(node.label)) return visited.get(node.label);
-	UndirectedGraphNode tmp = new UndirectedGraphNode(node.label);
-	visited.put(node.label,tmp);
-        for(UndirectedGraphNode neighbor:node.neighbors){
-	        tmp.neighbors.add(helper(neighbor,visited));
+    private void helper(Map<UndirectedGraphNode, UndirectedGraphNode> map, UndirectedGraphNode node){
+        List<UndirectedGraphNode> neighbors = node.neighbors;
+        for(UndirectedGraphNode neighbor : neighbors){
+            if(!map.containsKey(neighbor)){
+                UndirectedGraphNode copy = new UndirectedGraphNode(neighbor.label);
+                map.put(neighbor, copy);
+                helper(map, neighbor);
+            }
+            map.get(node).neighbors.add(map.get(neighbor));
         }
-        return tmp;
     }
-
 
 }
