@@ -1,3 +1,32 @@
+/*Sol1 priority queue*/  
+public List<Integer> topKFrequent(int[] nums, int k){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int num:nums){
+            if(map.get(num)==null){
+                map.put(num,1);
+            }else{
+                map.put(num,map.get(num)+1);
+            }
+        }
+
+        PriorityQueue<Map.Entry<Integer,Integer>> pq = new PriorityQueue<>(k, new Comparator<Map.Entry<Integer,Integer>>(){
+            public int compare(Map.Entry<Integer,Integer> entry1, Map.Entry<Integer,Integer> entry2){
+                return entry1.getValue()-entry2.getValue();
+            }
+        });
+
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            pq.add(entry);
+        }
+
+        List<Integer> ret = new ArrayList<Integer>();
+        while (!pq.isEmpty()){
+            ret.add(pq.poll().getValue());
+        }
+        return ret;
+    }
+
+/*Sol2 bucket sort*/
 public List<Integer> topKFrequent(int[] nums, int k) {
         if(nums==null || nums.length==0) return new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
