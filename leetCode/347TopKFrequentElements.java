@@ -1,4 +1,5 @@
 /*Sol1 priority queue, O(klogn)*/  
+public class Solution {
 public List<Integer> topKFrequent(int[] nums, int k){
         HashMap<Integer, Integer> map = new HashMap<>();
         for(int num:nums){
@@ -9,9 +10,9 @@ public List<Integer> topKFrequent(int[] nums, int k){
             }
         }
 
-        PriorityQueue<Map.Entry<Integer,Integer>> pq = new PriorityQueue<>(k, new Comparator<Map.Entry<Integer,Integer>>(){
+        PriorityQueue<Map.Entry<Integer,Integer>> pq = new PriorityQueue<>(new Comparator<Map.Entry<Integer,Integer>>(){
             public int compare(Map.Entry<Integer,Integer> entry1, Map.Entry<Integer,Integer> entry2){
-                return entry1.getValue()-entry2.getValue();
+                return entry2.getValue()-entry1.getValue();
             }
         });
 
@@ -20,11 +21,13 @@ public List<Integer> topKFrequent(int[] nums, int k){
         }
 
         List<Integer> ret = new ArrayList<Integer>();
-        while (!pq.isEmpty()){
-            ret.add(pq.poll().getValue());
+
+        while (k-->0){
+            ret.add(pq.poll().getKey());
         }
         return ret;
     }
+}
 
 /*Sol2 bucket sort*/
 public List<Integer> topKFrequent(int[] nums, int k) {
