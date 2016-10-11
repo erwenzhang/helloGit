@@ -1,4 +1,4 @@
-/*Sol1 priority queue, O(klogn)*/  
+/*Sol1 priority queue, O(nlogn)*/  
 public class Solution {
 public List<Integer> topKFrequent(int[] nums, int k){
         HashMap<Integer, Integer> map = new HashMap<>();
