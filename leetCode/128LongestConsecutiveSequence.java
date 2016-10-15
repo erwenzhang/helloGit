@@ -18,3 +18,57 @@ public class Solution {
          return longest;    
     }
 }
+
+
+
+public int longestConsecutive(int[] nums) {
+        if(nums==null || nums.length==0) return 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        unionFound uf = new unionFound(nums.length);
+        
+        for(int i=0; i<nums.length; i++){
+           if(map.containsKey(nums[i])) continue;
+           map.put(nums[i],i);
+           if(map.containsKey(nums[i]-1)){
+               uf.union(i, map.get(nums[i]-1));
+           }
+           if(map.containsKey(nums[i]+1)){
+               uf.union(i, map.get(nums[i]+1));
+           }
+        }
+        return uf.max;
+    }
+    
+    class unionFound{
+        public int[] weight;
+        public int[] parent;
+        public int max;
+        public unionFound(int size){
+            this.weight = new int[size];
+            this.parent = new int[size];
+            for(int i=0; i<size; i++){
+                this.parent[i] = i;
+                this.weight[i] = 1;
+            }
+            max = 1;
+        }
+        
+        public int findParent(int node){
+            if(parent[node]!=node) return parent[node] = findParent(parent[node]);
+            return node;
+        }
+        
+        public void union(int i, int j){
+            int root1 = findParent(i);
+            int root2 = findParent(j);
+            if(weight[root1]>=weight[root2]){
+                weight[root1] += weight[root2];
+                parent[root2] = root1;
+                max = Math.max(weight[root1], max);
+            }else{
+                weight[root2] += weight[root1];
+                parent[root1] = root2;
+                max = Math.max(weight[root2], max);
+            }
+        }
+    }
