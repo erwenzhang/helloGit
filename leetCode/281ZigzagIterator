@@ -1,79 +1,33 @@
-
-
 public class ZigzagIterator{
-    private List<Integer> v1, v2;
-    private int[] mark;
-    private int[] len;
-    private boolean[] flag;
-
+    Iterator<Integer> it1;
+    Iterator<Integer> it2;
+    int listFlag;
     public ZigzagIterator(List<Integer> v1, List<Integer> v2){
-
-        this.v1 = v1;
-        this.v2 = v2;
-        this.len = new int[2];
-        this.mark = new int[2];
-        this.flag = new boolean[2];
-        this.len[0]=v1.size();
-        this.len[1]=v2.size();
-        Arrays.fill(this.mark, 0);
-        Arrays.fill(this.flag,false);
-        this.flag[0] = true;
-
-
-
+        if(v1 != null)
+            it1 = v1.iterator();
+        if(v2 != null)
+            it2 = v2.iterator();
+        listFlag = 1;
     }
-
     public int next(){
-        if(this.hasNext()){
-            if(this.mark[0]<this.len[0]&&this.mark[1]<this.len[1]){
-                if(flag[0]){
-                    flag[1] = true;
-                    flag[0] = false;
-                    int tmp = this.mark[0];
-                    this.mark[0]+=1;
-                    return this.v1.get(tmp);
-                }
-                else{
-                    flag[0]= true;
-                    flag[1] = false;
-                    int tmp = this.mark[1];
-                    this.mark[1]+=1;
-                    return this.v2.get(tmp);
-                }
+        if(listFlag == 1){
+            listFlag = 2;
+            if(it1.hasNext()){
+                return it1.next();
+            }else if(it2.hasNext()){
+                return it2.next();
             }
-            else if(this.mark[0]<this.len[0]){
-                int tmp = this.mark[0];
-                this.mark[0]+=1;
-                return this.v1.get(tmp);
-
-
+        }else{
+            listFlag = 1;
+            if(it2.hasNext()){
+                return it2.next();
+            }else if(it1.hasNext()){
+                return it1.next();
             }
-            else{
-                int tmp = this.mark[1];
-                this.mark[1]+=1;
-                return this.v2.get(tmp);
-            }
-
-
-
-
-
-
         }
-        else {
-         //   throw new Error("Out of boundary.");
-            return 0;
-        }
-
+        return -1;
     }
-
     public boolean hasNext(){
-        if(this.mark[0]>=this.len[0]&&this.mark[1]>=this.len[1]){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return it1.hasNext()||it2.hasNext();
     }
-
 }
