@@ -50,3 +50,32 @@ public class Solution {
     }
 
 }
+
+//better sol
+public class Solution {
+    
+    char[][] dict = {{'0','0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
+   
+    public List<String> findStrobogrammatic(int n) {
+       if(n<=0) return new ArrayList<String>();
+       List<String> result = new ArrayList<String>();
+       char[] str = new char[n];
+       helper(result, str, n, n, 0);
+       return result;
+    }
+    
+    public void helper(List<String> result, char[] str, int len, int length, int start){
+        if(len<=0){
+            result.add(new String(str));
+            return;
+        }
+        
+        for(int i=0; i<dict.length; i++){
+            if(start==0 && len>1 && i==0) continue;
+            if(len==1 && (i==2 || i==4)) continue;
+            str[start] = dict[i][0];
+            str[length-1-start] = dict[i][1];
+            helper(result, str, len-2, length, start+1);
+        }
+    }
+}
