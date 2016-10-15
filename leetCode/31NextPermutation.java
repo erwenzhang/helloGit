@@ -44,3 +44,50 @@ public void swap(int[] nums, int m, int n){
     nums[m] = nums[n];
     nums[n] = tmp;
 }
+
+
+
+
+public class Solution {
+    public void nextPermutation(int[] nums) {
+           if(nums==null || nums.length<2) return;
+          
+           int index = nums.length-1;
+           while(index>0){
+               if(nums[index-1]<nums[index]) break;
+               index--;
+           }
+           
+           if(index==0) {
+               reverse(nums, 0, nums.length-1);
+               return;
+           }
+           else{
+               int val = nums[index-1];
+               int j = nums.length-1;
+               while(j>=index){
+                   if(nums[j]>val) break;
+                   j--;
+               }
+               swap(nums, j, index-1);
+               reverse(nums, index, nums.length-1);
+               return;
+           }
+           
+    }
+    
+    public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
+    public void reverse(int[] nums, int start, int end){
+        if(start>end) return;
+        while(start<end){
+            swap(nums, start, end);
+            start++;
+            end--;
+        }
+    }
+}
