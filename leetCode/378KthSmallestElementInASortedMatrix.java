@@ -1,3 +1,4 @@
+//heap
 public class Solution {
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
@@ -23,5 +24,39 @@ class Tuple implements Comparable<Tuple> {
     @Override
     public int compareTo (Tuple that) {
         return this.val - that.val;
+    }
+}
+
+
+//binary serach
+public class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        if(matrix==null||matrix.length==0) return 0;
+        int n = matrix.length;
+        int lo = matrix[0][0];
+        int hi = matrix[n-1][n-1];
+        while(lo<hi){
+            int mid = (lo+hi)>>1;
+            int count = 0;
+            for(int i = 0; i < n; i++){
+                int loR = 0;
+                int hiR = n; // be careful
+                while(loR<hiR){
+                    int midR = (loR+hiR)>>1;
+                    if(matrix[i][midR]>mid){
+                        hiR = midR; // be careful
+                    }else{
+                        loR = midR + 1;
+                    }
+                }
+                count += loR;
+            }
+            if(count<k){
+                lo = mid+1;
+            }else{
+                hi = mid;
+            }
+        }
+        return lo;
     }
 }
