@@ -1,9 +1,13 @@
-//heap
+//heap k*logk
 public class Solution {
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
         PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>();
-        for(int j = 0; j <= n-1; j++) pq.offer(new Tuple(0, j, matrix[0][j]));
+        int bound = matrix.length < k ? matrix.length : k;
+        for(int j = 0; j < bound; j++)  {
+            pq.offer(new Tuple(0, j, matrix[0][j]));
+        }
+        
         for(int i = 0; i < k-1; i++) {
             Tuple t = pq.poll();
             if(t.x == n-1) continue;
@@ -28,7 +32,7 @@ class Tuple implements Comparable<Tuple> {
 }
 
 
-//binary serach
+//binary serach nlog(n)log(n)?? or nlogn
 public class Solution {
     public int kthSmallest(int[][] matrix, int k) {
         if(matrix==null||matrix.length==0) return 0;
