@@ -4,7 +4,7 @@ public class Solution {
     	for(int j = 1;j<n;j++){
     	    StringBuilder sb = new StringBuilder();
           char [] oldChars = oldString.toCharArray();
-        	 for(int i = 0;i<oldChars.length;i++){
+          for(int i = 0;i<oldChars.length;i++){
         	     int count = 1;
         		  while((i+1)<oldChars.length&&oldChars[i]==oldChars[i+1]){
                   count++;
