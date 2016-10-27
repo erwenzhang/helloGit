@@ -1,43 +1,17 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-     int tmp;
-    public int closestValue(TreeNode root, double target){
-        double dis = Double.MAX_VALUE;
-        findClosest(root,target,dis);
-        return tmp;
-    }
-
-    public void findClosest(TreeNode root,double target, double dis){
-        if(root==null)
-            return;
-        if(Math.abs(root.val - target)<=dis){
-            tmp=root.val;
-            dis=Math.abs(root.val - target);
+public int closestValue(TreeNode root, double target) {
+        if(root==null) return 0;
+        double min = Double.MAX_VALUE;
+        int val = 0;
+        while(root!=null){
+            if(min>=Math.abs(root.val-target)){
+                min = Math.abs(root.val-target);
+                val = root.val;
+            }
+            if(root.val<target){
+                root = root.right;
+            }else{
+                root = root.left;
+            }
         }
-        if(root.val-target>0){
-            findClosest(root.left,target,dis);
-        }
-        else{findClosest(root.right,target,dis);}
-    }
-
-}
-
-/****much concise and easier solution *****/
-public int closestValue(TreeNode root,double target){
-     int ret = root.val;
-     while(root!=null){
-          if(Math.abs(root.val-target)<Math.abs(ret-target)){
-              ret = root.val;
-          }
-          root = (root.val>target)?root.left:root.right;
-     }
-     return ret;
+        return val;
 }
